@@ -81,7 +81,7 @@ PCに向かって長文のプロンプトを打ち込む際、「スマホの優
 ### 2. インストール
 ```bash
 # プロジェクトのクローンと移動
-git clone https://github.com/yourusername/claude-voice-bridge.git
+git clone https://github.com/nohikomiso/claude-voice-bridge.git
 cd claude-voice-bridge
 
 # 依存関係のインストール（仮想環境の自動構築）
@@ -150,7 +150,8 @@ uv run python cli.py "コピーしたいテキスト"
 ---
 
 ## 🗺️ 今後の展望
-- **Ubuntu (Linux) サポート検証**: 開発の原点でもある Ubuntu での動作を正式にサポートするための検証タスク（`xclip` や `wl-copy` への依存性テスト）を予定しています。
+- **クリップボード連携の強化**: 現状は一般的な `CLIPBOARD` セレクション（`Ctrl+V` 用）のみの対応ですが、要望に応じてLinuxでの `PRIMARY` セレクション（マウス中クリック用）のサポート拡張などを検討しています。
+- **Wayland サポート**: 現状Ubuntu等のLinux環境は X11 のみサポート（`xclip` 利用）していますが、よりモダンな Wayland 環境のサポート（`wl-clipboard` 利用）も検証対象です。
 
 ---
 

@@ -51,10 +51,13 @@ async def on_message(message):
         display_text = message.content[:50] + ('...' if len(message.content) > 50 else '')
         print(f"\n[受信] @{message.author}: {display_text}")
         try:
-            copier.copy(message.content)
-            print("-> クリップボードへのコピーに成功しました。")
+            success = copier.copy(message.content)
+            if success:
+                print("-> クリップボードへのコピーに成功しました。")
+            else:
+                print("-> [エラー] コピー処理が中断されました。")
         except Exception as e:
-            print(f"-> [エラー] コピーに失敗しました: {e}")
+            print(f"-> [エラー] 予期せぬエラーが発生しました: {e}")
 
 if __name__ == "__main__":
     try:

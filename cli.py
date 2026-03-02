@@ -21,10 +21,13 @@ def main():
 
     try:
         copier = ClipboardCopier()
-        copier.copy(args.text)
+        success = copier.copy(args.text)
+
+        if not success:
+            sys.exit(1)
 
     except Exception as e:
-        print(f"\n[エラー] 実行中にエラーが発生しました: {e}", file=sys.stderr)
+        print(f"\n[エラー] 実行中に予期せぬエラーが発生しました: {e}", file=sys.stderr)
         sys.exit(1)
 
 if __name__ == "__main__":
