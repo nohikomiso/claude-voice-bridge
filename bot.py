@@ -11,7 +11,9 @@ DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 DISCORD_TARGET_CHANNEL_ID = os.getenv("DISCORD_TARGET_CHANNEL_ID")
 
 if not DISCORD_BOT_TOKEN or not DISCORD_TARGET_CHANNEL_ID:
-    print("[エラー] .env ファイルに DISCORD_BOT_TOKEN と DISCORD_TARGET_CHANNEL_ID を設定してください。")
+    print(
+        "[エラー] .env ファイルに DISCORD_BOT_TOKEN と DISCORD_TARGET_CHANNEL_ID を設定してください。"
+    )
     sys.exit(1)
 
 try:
@@ -28,12 +30,16 @@ client = discord.Client(intents=intents)
 # コピー用クラスのインスタンス化
 copier = ClipboardCopier()
 
+
 @client.event
 async def on_ready():
     print(f"[{client.user}] としてログインしました。")
     print(f"監視対象チャンネルID: {TARGET_CHANNEL_ID}")
-    print("指定チャンネルにメッセージが送信されると、自動的にクリップボードにコピーされます。")
+    print(
+        "指定チャンネルにメッセージが送信されると、自動的にクリップボードにコピーされます。"
+    )
     print("終了するには Ctrl+C を押してください...\n")
+
 
 @client.event
 async def on_message(message):
@@ -48,7 +54,9 @@ async def on_message(message):
     # メッセージの内容があればクリップボードにコピーする
     if message.content:
         # 長い場合は省略して表示
-        display_text = message.content[:50] + ('...' if len(message.content) > 50 else '')
+        display_text = message.content[:50] + (
+            "..." if len(message.content) > 50 else ""
+        )
         print(f"\n[受信] @{message.author}: {display_text}")
         try:
             success = copier.copy(message.content)
@@ -58,6 +66,7 @@ async def on_message(message):
                 print("-> [エラー] コピー処理が中断されました。")
         except Exception as e:
             print(f"-> [エラー] 予期せぬエラーが発生しました: {e}")
+
 
 if __name__ == "__main__":
     try:
