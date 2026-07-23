@@ -58,7 +58,4 @@ class ClipboardCopier:
                 "Linux (Ubuntu等のX11環境) をご使用の場合は、以下のコマンドで xclip をインストールしてください:"
             )
             print("  sudo apt install xclip")
-            print(
-                "※注意: 当ツールはWayland環境をサポートしていません。必要に応じてX11セッションをご利用ください。"
-            )
             return False

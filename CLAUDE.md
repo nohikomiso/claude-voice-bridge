@@ -11,7 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 開発環境・ツール
 - **パッケージマネージャ**: `uv` を使用。
 - **Pythonバージョン**: Python 3.13
-- **依存関係**: `discord.py`, `python-dotenv`, `pyperclip`
+- **依存関係**: `discord.py`, `python-dotenv`, `pyperclip`（Linux X11 では `xclip`、Wayland では `wl-clipboard` が別途必要）
 
 ## コマンド・運用ルール
 当プロジェクトではシステムの破壊を防ぐため、**`python` や `pip` の直接実行、および仮想環境の手動アクティベート (`source .venv/Scripts/activate` 等) は禁止**されています。また `uv pip` などの互換コマンドも使用せず、必ず `uv` のネイティブコマンドを使用してください。
@@ -35,7 +35,7 @@ uvx ruff check .
 ## アーキテクチャ構成
 - `bot.py`: Discordサーバー上の特定チャンネルを監視し、新規メッセージを受信した際に `ClipboardCopier` を呼び出します。
 - `cli.py`: コマンドラインから直接テキストを渡してクリップボードにコピーするためのエントリポイント。
-- `clipboard.py`: コアロジックである `ClipboardCopier` クラスを提供。OSのクリップボードへのテキストセットを担当します。
+- `clipboard.py`: コアロジックである `ClipboardCopier` クラスを提供。Wayland では `wl-copy`、それ以外では `pyperclip` 経由でOSのクリップボードへテキストをセットします。
 
 ## 機密情報の管理
 - `.env` ファイルに `DISCORD_BOT_TOKEN` および `DISCORD_TARGET_CHANNEL_ID` を保存して運用します。
